@@ -1,0 +1,464 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">
+                <i class="fas fa-utensils me-2"></i>Porto Belo
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#comida-llevar">Comida Llevar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#carta">Carta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reservas">Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <img src="{{ url_for('static', filename='img/ChatGPT Image 22_09_2025, 12_36_09.png') }}" alt="Restaurante Porto Belo" class="hero-img">
+        <div class="hero-overlay">
+            <h1 class="display-3 fw-bold text-white text-shadow">Restaurante Porto Belo</h1>
+            <p class="lead text-white text-shadow"></p>
+            <a href="#reservas" class="btn btn-primary btn-lg mt-3">Reserva ahora</a>
+        </div>
+    </section>
+
+    <!-- Flash Messages -->
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Bienvenido a Porto Belo</h2>
+            
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <h3>Comida para llevar</h3>
+                    <p>Lleve nuestro restaurante a su casa. Con nuestro servicio de comida para llevar, puedes disfrutar de la experiencia de cenar en nuestro restaurante sin tener que salir de casa. Nuestro equipo siempre está listo para satisfacer sus necesidades y asegurar que su experiencia sea inolvidable.</p>
+                    
+                    <h4 class="mt-4">¿Por qué elegir nuestro servicio de comida para llevar?</h4>
+                    <ul>
+                        <li>Comida deliciosa y fresca, preparada con ingredientes de alta calidad.</li>
+                        <li>Entrega puntual y eficiente, para que puedas disfrutar de tu comida cuando quieras.</li>
+                        <li>Opciones variadas para satisfacer sus necesidades y preferencias.</li>
+                        <li>Personal capacitado y dedicado para garantizar su satisfacción.</li>
+                    </ul>
+                    
+                    <a href="#comida-llevar" class="btn btn-primary mt-3">Ver opciones para llevar</a>
+                </div>
+                <div class="col-md-6">
+                    <div class="gallery-img">
+                        <img src="{{ url_for('static', filename='img/ambiente-interior.jpg.jpeg') }}" alt="Interior del restaurante" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-md-6 order-md-2">
+                    <h3>Vista espectacular</h3>
+                    <p>Nuestra experiencia va más allá de la comida. Nuestro restaurante ofrece una vista espectacular a las montañas, que es simplemente deslumbrante. Imagina disfrutar de una deliciosa comida mientras disfrutas de la belleza natural de las montañas. ¡Es una experiencia que no puedes perderte!</p>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="gallery-img">
+                        <img src="{{ url_for('static', filename='img/vista-montanhas.jpg.jpeg') }}" alt="Vista a las montañas" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3>Crea memorias inesquecibles</h3>
+                    <p>También ofrecemos servicios de almuerzos de cumpleaños personalizados para hacer su día especial aún más memorable. Nuestro equipo está listo para crear una experiencia única e inolvidable para usted y sus invitados. Desde la elección del menú hasta la decoración, nos esforzamos para asegurar que cada detalle sea perfecto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comida para Llevar Section -->
+    <section id="comida-llevar" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Comida para Llevar</h2>
+            
+            <div class="row">
+                <div class="col-md-6 d-flex flex-column">
+                    <h3 class="mb-4">Opciones Disponibles</h3>
+                    <div class="d-flex flex-column h-100">
+                        <div class="card mb-4 flex-fill">
+                            <div class="card-body">
+                                <h5 class="card-title">Menú Completo para Llevar</h5>
+                                <p class="card-text">Disfruta de nuestros platos principales con guarnición y postre</p>
+                                <ul>
+                                    <li>Todos los platos de la carta disponibles</li>
+                                    <li>Envase especial para mantener la temperatura</li>
+                                    <li>Instrucciones de calentamiento incluidas</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card mb-4 flex-fill">
+                            <div class="card-body">
+                                <h5 class="card-title">Comida para Grupos</h5>
+                                <p class="card-text">Perfecto para reuniones familiares o eventos</p>
+                                <ul>
+                                    <li>Porciones para 4, 6 u 8 personas</li>
+                                    <li>Variedad de platos combinados</li>
+                                    <li>Descuentos especiales para grupos grandes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex flex-column">
+                    <h3 class="mb-4">Cómo Pedir</h3>
+                    <div class="d-flex flex-column h-100">
+                        <div class="card mb-4 flex-fill">
+                            <div class="card-body">
+                                <h5 class="card-title">Por Teléfono</h5>
+                                <p class="card-text">Llama directamente al restaurante</p>
+                                <p class="h4">(34) 647525324</p>
+                                <p>comidas 13:30h a lás 16:00h<br>(Lá cococina cierra a lás 15:00h)<br>cenas 20:30h a lás 23:00h<br>(lá cocina cierra a lás 22:00h)</p>
+                            </div>
+                        </div>
+                        <div class="card mb-4 flex-fill">
+                            <div class="card-body">
+                                <h5 class="card-title">Por WhatsApp</h5>
+                                <p class="card-text">Envía un mensaje con tu pedido</p>
+                                <a href="https://wa.me/34647525324?text=Hola,%20me%20gustaría%20hacer%20un%20pedido%20para%20llevar" class="btn btn-success" target="_blank">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#carta" class="btn btn-primary btn-lg">
+                    <i class="fas fa-utensils me-2"></i>Ver Nuestra Carta
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="carta" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Nuestra Carta</h2>
+            
+            <div class="row">
+            <div class="row">
+                <div class="col-md-6 menu-category">
+                    <h3 class="mb-4"><i class="fas fa-utensil-spoon me-2"></i>Caldos y Sopas</h3>
+                    <div class="menu-item">
+                        <h5>Caldo Gallego <span class="menu-price">€8,00</span></h5>
+                        <p class="text-muted">Caldo tradicional gallego <span class="fst-italic">(precio por persona)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Caldo de Costilla <span class="menu-price">€6,50</span></h5>
+                        <p class="text-muted">Caldo sustancioso de costilla <span class="fst-italic">(precio por persona)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Caldo de Verduras <span class="menu-price">€2,50</span></h5>
+                        <p class="text-muted">Caldo vegetal con verduras frescas <span class="fst-italic">(precio por persona)</span></p>
+                    </div>
+                    <!-- Postres será movido para baixo de Carnes -->
+                    <h3 class="mb-4" style="margin-top:0;"><i class="fas fa-drumstick-bite me-2"></i>Carnes <span style="font-size:0.55em;font-weight:normal;">(Acompaña una guarnición a elegir)</span></h3>
+                    <div class="menu-item">
+                        <h5>Chuletón de Ternera <span class="menu-price">€50,00/kg</span></h5>
+                        <p class="text-muted">Chuletón de ternera gallega <span class="fst-italic">(precio por kilo)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Entrecott de Ternera <span class="menu-price">€45,00/kg</span></h5>
+                        <p class="text-muted">Entrecot jugoso a la parrilla <span class="fst-italic">(precio por kilo)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Solomillo de Ternera <span class="menu-price">€60,00/kg</span></h5>
+                        <p class="text-muted">Solomillo con salsa de la casa <span class="fst-italic">(precio por kilo)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Solomillo de Cerdo <span class="menu-price">€21,00/kg</span></h5>
+                        <p class="text-muted">Solomillo de cerdo ibérico <span class="fst-italic">(precio por kilo)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Guarniciones <span class="menu-price">€2,50</span></h5>
+                        <p class="text-muted">Patata frita, Arroz blanco, Frijoles negros</p>
+                    </div>
+                    <h3 class="mb-4" style="margin-top:0.2em;"><i class="fas fa-ice-cream me-2"></i>Postres</h3>
+                    <div class="menu-item">
+                        <h5>Tarta de Almendras <span class="menu-price">€6,00</span></h5>
+                        <p class="text-muted">Tarta casera de almendras <span class="fst-italic">(precio por unidad)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Tarta de manzana con helado de vainilla <span class="menu-price">€7,00</span></h5>
+                        <p class="text-muted">Tarta caliente con helado <span class="fst-italic">(precio por unidad)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Pudin de los Abades <span class="menu-price">€6,00</span></h5>
+                        <p class="text-muted"><span class="fst-italic">(precio por unidad)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Helados 2 bolas (copa) <span class="menu-price">€5,00</span></h5>
+                        <p class="text-muted"><span class="fst-italic">(precio por unidad)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Helados 3 bolas (taza) <span class="menu-price">€8,00</span></h5>
+                        <p class="text-muted"><span class="fst-italic">(precio por unidad)</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6 menu-category">
+                    <h3 class="mb-4"><i class="fas fa-bowl-rice me-2"></i>Arroces (Caldosos) </h3>
+                    <div class="menu-item">
+                        <h5>Arroz con Pulpo <span class="menu-price">€18,00</span></h5>
+                        <p class="text-muted">Arroz caldoso con pulpo gallego <span class="fst-italic">(mínimo 2 personas, precio por persona)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Arroz de Marisco <span class="menu-price">€17,00</span></h5>
+                        <p class="text-muted">Selección de mariscos  <span class="fst-italic">(mínimo 2 personas, precio por persona)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Arroz de Rapé con Gambas <span class="menu-price">€18,00</span></h5>
+                        <p class="text-muted">Arroz con rape y gambas <span class="fst-italic">(mínimo 2 personas, precio por persona)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Arroz de Bacalao <span class="menu-price">€14,00</span></h5>
+                        <p class="text-muted">Arroz caldoso con bacalao <span class="fst-italic">(mínimo 2 personas, precio por persona)</span></p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Arroz de Pollo de corral <span class="menu-price">€12,00</span></h5>
+                        <p class="text-muted">Arroz con pollo y verduras <span class="fst-italic">(mínimo 2 personas, precio por persona)</span></p>
+                    </div>
+                    <h3 class="mb-4 mt-5"><i class="fas fa-fish me-2"></i>Pescados</h3>
+                    <div class="menu-item">
+                        <h5>Merluza del Pescador <span class="menu-price">€16,00</span></h5>
+                        <p class="text-muted">(precio por persona)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Lubina / Dorada frita <span class="menu-price">€15,00</span></h5>
+                        <p class="text-muted">(precio por persona)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Bacalao á Braga <span class="menu-price">€22,00</span></h5>
+                        <p class="text-muted">(precio por persona)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Asado de la Casa <span class="menu-price">€20,00</span></h5>
+                        <p class="text-muted">(precio por persona)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Á Gomes de Sá <span class="menu-price">€18,00</span></h5>
+                        <p class="text-muted">(precio por persona)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Á las brasas <span class="menu-price">€22,00</span></h5>
+                        <p class="text-muted">(precio por persona)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Bacalao dorado <span class="menu-price">€15,00</span></h5>
+                        <p class="text-muted">(precio por persona)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h5>Tortillitas de bacalao <span class="menu-price">€8,00</span></h5>
+                        <p class="text-muted">(precio por persona,6 und.)</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="text-center mt-5">
+                <a href="https://acrobat.adobe.com/id/urn:aaid:sc:EU:4686aebd-e8a9-437b-a284-1ee1e5da271c" class="btn btn-primary btn-lg">
+                    <i class="fas fa-book me-2"></i>Ver Menú del Día
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservas" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Reserva tu Mesa</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="reservation-form">
+                        <form action="/reservar" method="POST">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nombre" class="form-label">Nombre completo *</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="telefono" class="form-label">Teléfono *</label>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="fecha" class="form-label">Fecha *</label>
+                                    <input type="date" class="form-control" id="fecha" name="fecha" required min="{{ hoy }}">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="hora" class="form-label">Hora *</label>
+                                    <input type="time" class="form-control" id="hora" name="hora" required min="13:30" max="23:00">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="personas" class="form-label">Número de personas *</label>
+                                <select class="form-select" id="personas" name="personas" required>
+                                    <option value="" selected disabled>Seleccione...</option>
+                                    <option value="1">1 persona</option>
+                                    <option value="2">2 personas</option>
+                                    <option value="3">3 personas</option>
+                                    <option value="4">4 personas</option>
+                                    <option value="5">5 personas</option>
+                                    <option value="6">6 personas</option>
+                                    <option value="7">7+ personas (especifique en comentarios)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="comentarios" class="form-label">Comentarios o peticiones especiales</label>
+                                <textarea class="form-control" id="comentarios" name="comentarios" rows="3" placeholder="Alergias, celebraciones especiales, etc."></textarea>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar Reserva</button>
+                            </div>
+                            
+                            <p class="text-muted mt-3 text-center">
+                                <small>* Las reservas se confirman mediante WhatsApp. Se requiere un intervalo de 30 minutos entre reservas.</small>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-phone-alt fa-3x mb-3"></i>
+                            <h4>Teléfono</h4>
+                            <p class="card-text">(34) 647525324</p>
+                            <a href="tel:34647525324" class="btn btn-primary">Llamar ahora</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope fa-3x mb-3"></i>
+                            <h4>Email</h4>
+                            <p class="card-text">portobelorestaurantedesanabria@gmail.com</p>
+                            <a href="mailto:portobelorestaurantedesanabria@gmail.com" class="btn btn-primary">Enviar email</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marker-alt fa-3x mb-3"></i>
+                            <h4>Dirección</h4>
+                            <p class="card-text">Sanabria, Zamora<br>España</p>
+                            <a href="https://maps.google.com/?q=Restaurante+Porto+Belo+Sanabria" class="btn btn-primary" target="_blank">Ver en mapa</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-clock fa-3x mb-3"></i>
+                            <h4>Horario</h4>
+                            <p class="card-text">
+                                comidas 13:30h a lás 16:00h<br>(Lá cococina cierra a lás 15:00h)<br>cenas 20:30h a lás 23:00h<br>(lá cocina cierra a lás 22:00h)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <h4>Síguenos en redes sociales</h4>
+                <div class="mt-3">
+                    <a href="https://www.facebook.com/" class="social-icon" target="_blank" style="font-size:2.2rem; color:#1877f3; margin:0 10px; text-decoration:none;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/restauranteportobelo/?__pwa=1" class="social-icon" target="_blank" style="font-size:2.2rem; color:#E1306C; margin:0 10px; text-decoration:none;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Restaurante Porto Belo</h5>
+                    <p>Disfruta de la mejor cocina gallega en un ambiente acogedor con vistas espectaculares.</p>
+                </div>
+                <!-- Horário removido do rodapé conforme solicitado -->
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="text-center">
+                <p>© 2025 Restaurante Porto Belo. Todos los derechos reservados.</p>
+                <p style="font-size: 0.95em; color: #888; margin-top: 0.5em;">
+                    <a href="https://wa.me/351929479472?text=Hola,queria fazer o meu site contigo%20Jacinto!" target="_blank" style="color: #888; text-decoration: none;">Powered by Jacinto Ambrosio</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/34647525324?text=Hola,%20me%20gustaría%20hacer%20una%20consulta" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+{% endblock %}
